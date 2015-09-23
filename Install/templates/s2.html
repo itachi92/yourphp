@@ -1,0 +1,74 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("input[type='text']").addClass("input_blur").mouseover(function(){ $(this).addClass("input_focus");}).mouseout(function(){$(this).removeClass("input_focus");});
+		$(".table tr").mouseover(function(){ $(this).addClass("mouseover");}).mouseout(function(){$(this).removeClass("mouseover");	});
+	});
+</script>
+
+			<!-- 页面main:box:b1:right部分开始-->
+			<div class="right">
+				<h2>Step <?php echo $step;?> of 5 </h2>
+				<h1>服务器信息</h1>	
+				<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table">
+					<tr>
+						<th width="300" align="left"><strong>参数</strong></th>
+						<th width="424" align="left"><strong>值</strong></th>
+					</tr>
+					<?php
+						foreach ($data['server']['result'] as $key => $value) {
+							echo "<tr>";
+							echo "<td><strong>$key</strong></td>";
+							echo "<td>$value</td>";
+							echo "</tr>";
+						}
+					?>
+				</table>
+				
+				<h1>系统环境要求</h1> 
+				<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" class="table">
+					<tr>
+						<th width="230"><strong>需开启的变量或函数</strong></th>
+						<th width="100"><strong>系统要求</strong></th>
+						<th width="400"><strong>实际状态及建议</strong></th>
+					</tr>
+					<?php
+						foreach ($data['surpport']['result'] as $key => $value) {
+							echo "<tr>";
+							echo "<td>$key</td>";
+							echo "<td>支持</td>";
+							echo "<td>$value</td>";
+							echo "</tr>";
+						}
+					?>
+				</table>
+				
+				<h1>目录权限检测</h1> 
+				<div style="margin:10px auto; color:#666;">
+					系统要求必须满足下列所有的目录权限全部可读写的需求才能使用。
+				</div>
+	
+				<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table">
+					<tr>
+						<th width="230"><strong>目录名</strong></th>
+						<th width="100"><strong>系统要求</strong></th>
+						<th width="400"><strong>实际状态及建议</strong></th>
+					</tr>
+					<?php
+						foreach($data['directory']['result'] as $key => $val){
+							echo "<tr>";
+							echo "<td>$key</td>";
+							echo "<td>读写</td>";
+							echo "<td>$val</td>";
+							echo "</tr>";
+						}
+					?>
+				</table>
+
+
+				<div class="butbox">
+					<input type="button" class="inputButton" value=" 上一步 " onclick="history.back();" style="margin-right:20px" />		
+					<input type="button" class="inputButton" value=" 下一步 " onclick="window.location.href='index.php?step=3';" <?php if($err>0){ ?> id="nonext"  disabled<?php } ?>  />	
+					<input type="button" class="inputButton" value=" 重新检测 " onclick="document.location.reload();" style="margin-left:20px" />
+				</div>
+			</div>
+			<!-- 页面main:box:b1:right部分结束-->

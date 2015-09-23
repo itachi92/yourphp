@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><?php echo $steps[$step];?> - Yourphp企业网站管理系统 v2.1正式版 - 安装向导</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="./templates/Js/jquery.min.js" language="javascript" type="text/javascript"></script>
+<script src="./templates/Js/jquery.form.js" language="javascript" type="text/javascript"></script>
+<script src="./templates/Js/jquery.validate.js" language="javascript" type="text/javascript"></script>
+<link href="./templates/Css/style.css" rel="stylesheet" type="text/css" />
+<!--[if IE 6]>
+	<script src="./templates/Js/DD_belatedPNG-min.js"  type="text/javascript" ></script>
+	<script type="text/javascript">
+		DD_belatedPNG.fix(' .top_box ,.step_nav ');
+	</script>
+<![endif]-->
+
+</head>
+<body>
+<!-- 页面top部分开始 -->
+<div class="top">
+	<div class="top_box"><b>Yourphp企业网站管理系统 v2.1正式版</b></div>
+	<div class="top_foot"></div>
+</div>
+<!-- 页面top部分结束 -->
+
+<!-- 页面main部分开始 -->
+<div class="main">
+	<h5>感谢您选择Yourphp企业网站管理系统</h5>
+
+	<!-- 页面main:title部分开始 -->
+	<div class="title"><ul>
+		<?php  foreach($steps as $key=>$res){ ?>
+		<li <?php if($step==$key):?> class="on"<?php endif;?> ><?php echo $res;?></li>
+		<?php } ?>
+		</ul>
+	</div>
+	<!-- 页面main:title部分结束 -->
+	
+	<!-- 页面main:box部分开始 -->
+	<div class="box">
+		<!-- 页面main:box:b1部分开始 -->
+		<div class="b1">
+			<!-- 页面main:box:b1:left部分开始 -->
+			<div class="left">
+				<div class="step_nav">
+					<h2>系统简介</h2>
+					<ul>
+						<li>1.PHP5+MYSQL4.1以上版本</li>
+						<li>2.核心采用了Thinkphp框架</li>
+						<li>3.集众多开源项目于一身</li>
+						<li>4.安全,高效率,易用及可扩展</li>
+						<li>5.程序内置SEO优化机制</li>
+						<li>6.静态页面生成功能</li>
+						<li>7.自定义模型及插件功能</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 页面main:box:b1:left部分结束-->

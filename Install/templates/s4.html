@@ -1,0 +1,72 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".table tr").each(function(){ $(this).children("td").eq(0).addClass("on");});
+		$("input[type='text']").addClass("input_blur").mouseover(function(){ $(this).addClass("input_focus");}).mouseout(function(){$(this).removeClass("input_focus");});
+		$(".table tr").mouseover(function(){ $(this).addClass("mouseover");}).mouseout(function(){$(this).removeClass("mouseover");	});
+	});
+</script>
+<script type="text/javascript">
+	var n = 0;
+	$(document).ready(function(){
+			reloads(n);
+		}
+	);
+
+	// var data = <?php echo json_encode($_POST);?>;
+	
+	$.ajaxSetup ({ cache: false });
+	
+	function reloads(n) {
+		
+		var url =  "./index.php?step=4&n="+n;
+
+		$.ajax({
+			type: "POST",		
+			url: url,
+			data: "",// Ajax只能提交字符串数据  数值=>字符串
+			dataType: 'json',
+			beforeSend:function(){},
+			success: function(msg){
+				if(msg.n=='999999'){
+					$('#dosubmit').attr("disabled",false);
+					$('#dosubmit').removeAttr("disabled");				
+					$('#dosubmit').removeClass("nonext");
+					
+					setTimeout('gonext()',1500);
+				}
+				if(msg.n){
+					$('#setupinfo').append("<p>"+msg.msg+"</p>");
+					$('#setupinfo p').css("color","green");
+					$('#setupinfo p span').css("color","blue");
+					var div = document.getElementById('setupinfo'); 
+					div.scrollTop = div.scrollHeight;
+					reloads(msg.n);
+				}else{
+					 //alert('指定的数据库不存在，系统也无法创建，请先通过其他方式建立好数据库！');
+					 // alert(msg.msg);
+					 $('#setupinfo').append("<span>安装被迫中断：<span class='error'>原因  --->"+msg.msg+"!</span></span>");
+					 $('#setupinfo span').css("color","red");
+					 $('#setupinfo span .error').css("color","blue");
+				}			 
+			}
+		});
+	}
+
+	function gonext(){
+		window.location.href='index.php?step=5';
+	}
+</script>
+
+			<!-- 页面main:box:b1:right部分开始-->
+			<div class="right">
+				<h2>Step <?php echo $step;?> of 5 </h2>
+				<h1>正在安装</h1>
+				<div id="setupinfo">正在开始安装...<br></div>
+	
+				<div class="butbox">
+					<input type="button" class="inputButton" value=" 上一步 " onclick="window.location.href='index.php?step=3';" style="margin-right:20px" />
+					<input name="dosubmit" type="submit" class="inputButton nonext" id="dosubmit" value=" 下一步 " disabled  />
+				</div>
+			</div>
+			<!-- 页面main:box:b1:right部分结束-->
+			
